@@ -3,6 +3,17 @@ import 'package:quiz_nlw5/core/core.dart';
 import 'package:quiz_nlw5/shared/widgets/progress_indicator/linear_progress_indicator_widget.dart';
 
 class QuizCardWidget extends StatelessWidget {
+  final String title;
+  final int totalQuestions;
+  final int totalAnswered;
+
+  const QuizCardWidget({
+    Key? key,
+    required this.title,
+    required this.totalQuestions,
+    required this.totalAnswered,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,28 +33,26 @@ class QuizCardWidget extends StatelessWidget {
               width: 40,
               child: Image.asset(AppImages.blocks),
             ),
-            SizedBox(
-              height: 24
-            ),
+            SizedBox(height: 20),
             Text(
-              'Gerenciamento de Estado',
+              title,
               style: AppTextStyles.body20,
             ),
-            SizedBox(
-              height: 24
-            ),
+            SizedBox(height: 24),
             Row(
               children: [
                 Expanded(
                   flex: 1,
                   child: Text(
-                    '3/10',
+                    '$totalAnswered/$totalQuestions',
                     style: AppTextStyles.body11,
                   ),
                 ),
                 Expanded(
                   flex: 4,
-                  child: LinearProgressIndicatorWidget(value: 0.7)
+                  child: LinearProgressIndicatorWidget(
+                    value: totalAnswered / totalQuestions,
+                  ),
                 ),
               ],
             )

@@ -53,7 +53,10 @@ class LevelButtonWidget extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 6),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 6,
+        ),
         child: Text(
           label,
           style: GoogleFonts.notoSans(

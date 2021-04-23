@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_nlw5/shared/models/user_model.dart';
 import '../../core/app_gradients.dart';
 import '../../core/app_text_styles.dart';
 import 'score_card_widget.dart';
 
 class AppBarWidget extends PreferredSize {
-  AppBarWidget()
+  final UserModel user;
+
+  AppBarWidget({required this.user})
       : super(
             preferredSize: Size.fromHeight(250),
             child: Container(
@@ -27,7 +30,7 @@ class AppBarWidget extends PreferredSize {
                             style: AppTextStyles.title,
                             children: [
                               TextSpan(
-                                text: "Phelps",
+                                text: user.name,
                                 style: AppTextStyles.titleBold,
                               )
                             ],
@@ -40,7 +43,7 @@ class AppBarWidget extends PreferredSize {
                             borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
                               image: NetworkImage(
-                                "https://avatars.githubusercontent.com/u/70112912?s=400&u=512740b8eff2410bfb5b6a5197debe990ec0a3b9&v=4",
+                                user.imageUrl,
                               ),
                             ),
                           ),
