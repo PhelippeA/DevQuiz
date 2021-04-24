@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_nlw5/challenge/views/challenge_screen.dart';
 import 'package:quiz_nlw5/home/controllers/home_controller.dart';
 import 'package:quiz_nlw5/home/controllers/home_state.dart';
 import 'package:quiz_nlw5/home/widgets/level_button_widget.dart';
@@ -56,6 +57,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                 title: e.title,
                                 totalAnswered: e.totalQuestionAnswered,
                                 totalQuestions: e.questions.length,
+                                onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => ChallengeScreen(questions: e.questions),
+                                  ),
+                                ),
                               ))
                           .toList(),
                     ),
