@@ -3,6 +3,8 @@ import 'package:quiz_nlw5/challenge/controllers/challenge_controller.dart';
 import 'package:quiz_nlw5/challenge/widgets/nextbutton_widget.dart';
 import 'package:quiz_nlw5/challenge/widgets/question_indicator_widget.dart';
 import 'package:quiz_nlw5/challenge/widgets/quiz_widget.dart';
+import 'package:quiz_nlw5/core/core.dart';
+import 'package:quiz_nlw5/result/result_screeen.dart';
 import 'package:quiz_nlw5/shared/models/question_model.dart';
 
 class ChallengeScreen extends StatefulWidget {
@@ -30,6 +32,12 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
         duration: Duration(seconds: 1),
         curve: Curves.linear,
       );
+  }
+
+  void onSelected(bool value) {
+    if (value) 
+      _challengeController.nCorrects++;
+    nextPage();
   }
 
   @override
@@ -63,7 +71,7 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
               .map(
                 (e) => QuizWidget(
                   question: e,
-                  onChange: nextPage,
+                  onSelected: onSelected,
                 ),
               )
               .toList()),
@@ -86,10 +94,19 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
                 SizedBox(width: 7),
                 if (value == widget.questions.length)
                   Expanded(
-                    child: NextButtonWidget.green(
+                    child: NextButtonWidget.colored(
                       label: "Encerrar",
+                      backGroundColor: AppColors.darkGreen,
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (ctx) => ResultScreen(
+                              result: _challengeController.nCorrects,
+                              title: widget.questions.first.title,
+                              length: widget.questions.length,
+                            ),
+                          ),
+                        );
                       },
                     ),
                   ),

@@ -7,7 +7,7 @@ class AnswerWigdet extends StatelessWidget {
   final AnswerModel answer;
   final bool isSelected;
   final bool disabled;
-  final VoidCallback onTap;
+  final ValueChanged<bool> onTap;
 
   AnswerWigdet({
     Key? key,
@@ -30,12 +30,16 @@ class AnswerWigdet extends StatelessWidget {
   IconData get _selectedIconRight =>
       answer.isRight ? Icons.check : Icons.error_outline;
 
+  onSelected(bool isCorrect){
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return IgnorePointer(
       ignoring: disabled,
       child: GestureDetector(
-        onTap: onTap,
+        onTap: () => onTap(answer.isRight),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 4),
           child: Container(
